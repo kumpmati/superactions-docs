@@ -1,5 +1,9 @@
 # Getting Started
 
+::: warning
+🚧 This library is still in an early state. Breaking changes will likely happen, so use at your own risk!
+:::
+
 To use Superactions, you need a SvelteKit project. You can either set up one from scratch, or use an existing one.
 This guide is the same for both.
 
