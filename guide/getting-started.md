@@ -9,37 +9,15 @@ Install the library using your package manager (npm, pnpm, yarn, bun):
 npm install -D sveltekit-superactions
 ```
 
-## Creating a server endpoint
+## Server setup
 
-A server endpoint is just a collection of actions, with each action being a function you'll be able to call in the client.
+First, we have to define an API on the server. An API is just a group of actions (fancy name for function) that we want to be able to call from client-side code as normal functions.
 
-To define a server endpoint, use the `superAPI` function. It takes in a path and some actions, and returns a normal SvelteKit request handler that can be exportes inside a `+server.ts` file.
+To define an API, use the `superAPI` function. It takes in a path and some actions, and returns a normal SvelteKit request handler that can be exportes inside a `+server.ts` file.
 
 First, create a `+server.ts` file somewhere inside your routes folder. We'll choose `src/routes/api` this time.
 
-Inside the `+server.ts` file, we'll call the `superAPI` function from `sveltekit-superactions`, and export its return value as a POST handler.
-
-```ts
-// src/routes/api/+server.ts
-import { superAPI } from "sveltekit-superactions";
-
-// superAPI returns a sveltekit request handler function.
-export const POST = superAPI({
-  // ...endpoint config
-});
-```
-
-The `superAPI` function takes in a config object with the following fields:
-
-### `path`
-
-This is the relative path where your server endpoint is mounted. Since we chose to export it at `src/routes/api/+server.ts`, path should be set as `/api`.
-
-### `actions`
-
-This is an object where each key becomes a callable function on the client-side, and the value is a server-side handler for that function.
-
-For now we'll expose a simple action from this endpoint:
+Inside the `+server.ts` file, we'll call the `superAPI` function from `sveltekit-superactions`, and export its return value as a POST handler:
 
 ```ts
 // src/routes/api/+server.ts
@@ -50,7 +28,7 @@ export const POST = superAPI({
   path: "/api",
   actions: {
     // The first argument is the RequestEvent provided by SvelteKit.
-    // The second argument is what the client passes to the function.
+    // The second argument is what the client passed as arguments.
     greet: async (event: RequestEvent, name: string) => {
       return { greeting: `Hello, ${name}!` };
     },
@@ -58,9 +36,21 @@ export const POST = superAPI({
 });
 ```
 
-## Exposing the endpoint to the client
+The `superAPI` function takes in a config object with the following fields:
 
-In order for the client to know what actions are available, we need to supply them to the client using a `+page.server.ts` or `+layout.server.ts` loader function. To do this, import the handler that you created using the `superAPI` function, and return its actions like so:
+### `path`
+
+This is the relative path where your API route is mounted. Since we chose to export it at `src/routes/api/+server.ts`, path should be set as `/api`.
+
+### `actions`
+
+This is the object where you define all the functions that the client can call in this API. Each action becomes a function to call when using the API in the client.
+
+## Load function
+
+The load function is what tells the client what APIs and actions are available.
+
+In order to access the API on the client, we need to supply the API's actions to it using a `+page.server.ts` or `+layout.server.ts` loader function. To do this, import the handler that you created using the `superAPI` function, and return its actions like so:
 
 ```ts
 // src/routes/+page.layout.ts
@@ -80,7 +70,7 @@ export const load = async () => {
 };
 ```
 
-## Creating the client API
+## Client setup
 
 In order to setup the client, simply pass the loaded actions to the `superActions` function:
 
