@@ -35,6 +35,10 @@ export default defineConfig({
         icon: "github",
         link: "https://github.com/kumpmati/sveltekit-superactions",
       },
+      {
+        icon: "npm",
+        link: "https://npmjs.com/package/sveltekit-superactions",
+      },
     ],
   },
 });
