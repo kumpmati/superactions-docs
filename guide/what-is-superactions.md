@@ -47,7 +47,7 @@ If the data is too complex but the submissions happen using forms, consider usin
 
 ### The data submission doesn't have to work without JavaScript
 
-If it has to also work without JavaScript, consider [form actions](https://kit.svelte.dev/docs/form-actions).
+If it has to also work without JavaScript, consider [form actions](https://kit.svelte.dev/docs/form-actions) or [Superforms](https://superforms.rocks).
 
 ### The endpoints that I'm implementing don't have to be exposed as a REST API
 
@@ -59,4 +59,4 @@ The library doesn't yet support data types other than JSON (contributions are we
 
 ## Shout-outs
 
-The behaviour is inspired by [React's Server Actions](https://react.dev/reference/rsc/server-actions), and the implementation (and name) takes inspiration from how [SvelteKit Superforms](https://superforms.rocks) shares state between the server and the client.
+The behaviour is inspired by [React's Server Actions](https://react.dev/reference/rsc/server-actions), and the implementation (and name) takes inspiration from how [Superforms](https://superforms.rocks) shares state between the server and the client.
