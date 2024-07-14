@@ -80,7 +80,7 @@ export const load = async () => {
 };
 ```
 
-### Creating the client API
+## Creating the client API
 
 In order to setup the client, simply pass the loaded actions to the `superActions` function:
 
