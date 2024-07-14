@@ -21,6 +21,13 @@ export default defineConfig({
           { text: "Getting Started", link: "/guide/getting-started" },
         ],
       },
+      {
+        text: "Validation",
+        items: [
+          { text: "With Zod", link: "/validation/zod" },
+          { text: "With Joi", link: "/validation/joi" },
+        ],
+      },
     ],
 
     socialLinks: [
