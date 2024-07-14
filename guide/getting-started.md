@@ -63,7 +63,7 @@ export const load = async () => {
   return {
     // ...other props
 
-    // The imported handler has a property called 'actions',
+    // The imported API has a property called 'actions',
     // which we need to return in the load function.
     myAPI: myAPI.actions,
   };
