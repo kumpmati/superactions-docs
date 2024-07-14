@@ -1,6 +1,6 @@
 # What is Superactions?
 
-Superactions is a small library built around the [server endpoints](https://kit.svelte.dev/docs/routing#server) functionality in [SvelteKit.](https://kit.svelte.dev)
+Superactions is a small library built around the [API routes](https://kit.svelte.dev/docs/routing#server) functionality in [SvelteKit.](https://kit.svelte.dev)
 
 It allows you to easily and type safely call your server-side code from the client, all while not trying to feel 'too magical'.
 
