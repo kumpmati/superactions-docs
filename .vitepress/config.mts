@@ -2,7 +2,6 @@ import { defineConfig } from "vitepress";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: "/superactions-docs/",
   title: "SvelteKit Superactions",
   description: "Call your server code like normal functions",
   themeConfig: {
