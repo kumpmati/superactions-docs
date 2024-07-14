@@ -53,7 +53,7 @@ If it has to also work without JavaScript, consider [form actions](https://kit.s
 
 If they have to conform to REST API rules, consider normal [API routes](https://kit.svelte.dev/docs/routing#server) instead.
 
-## All the data I'm sending can be represented as JSON
+### All the data I'm sending can be represented as JSON
 
 The library doesn't yet support data types other than JSON (contributions are welcome!). If this doesn't work for you, consider using [API routes](https://kit.svelte.dev/docs/routing#server) without this library.
 
