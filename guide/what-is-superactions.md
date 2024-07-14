@@ -51,7 +51,7 @@ If it has to also work without JavaScript, consider [form actions](https://kit.s
 
 ### The endpoints that I'm implementing don't have to be exposed as a REST API
 
-If they have to conform to REST API rules, consider normal [API routes](https://kit.svelte.dev/docs/routing#server) instead.
+If the endpoints have to conform to REST API rules, consider normal [API routes](https://kit.svelte.dev/docs/routing#server) instead.
 
 ### All the data I'm sending can be represented as JSON
 
