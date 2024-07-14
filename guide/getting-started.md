@@ -13,6 +13,14 @@ Install the library using your package manager (npm, pnpm, yarn, bun):
 npm install -D sveltekit-superactions
 ```
 
+## Overview
+
+In a nutshell, these are the three necessary parts to using Superactions:
+
+1. Server - Defines the API
+2. Load function(s) - Gives the API schema to client
+3. Client - Uses the API
+
 ## Server setup
 
 First, we have to define an API on the server. An API is just a group of actions (fancy name for function) that we want to be able to call from client-side code as normal functions.
