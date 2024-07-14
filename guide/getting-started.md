@@ -99,3 +99,7 @@ In order to setup the client, simply pass the loaded actions to the `superAction
 
 <button on:click={handleClick}>Click me</button>
 ```
+
+## Restrictions
+
+Note that there are [a couple restrictions](/guide/restrictions) to what you can currently do with the libary. Be sure to read them next.

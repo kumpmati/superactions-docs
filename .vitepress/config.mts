@@ -19,6 +19,7 @@ export default defineConfig({
             link: "/guide/what-is-superactions",
           },
           { text: "Getting Started", link: "/guide/getting-started" },
+          { text: "Restrictions", link: "/guide/restrictions" },
         ],
       },
       {
