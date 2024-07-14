@@ -4,8 +4,7 @@ layout: home
 
 hero:
   name: "SvelteKit Superactions"
-  # text: "Superpowers for your server actions"
-  tagline: Call your server code like normal functions
+  tagline: Call your server code from the client like normal functions.
   actions:
     - theme: brand
       text: What is Superactions?
