@@ -6,7 +6,7 @@ To use it, you must also have `joi` installed as a dependency.
 
 ## Usage
 
-Import the `joi` function and wrap the action you want to validate with it. The first argument is the Zod schema, and the second argument is the action itself.
+Import the `joi` helper function and wrap the action you want to validate with it. The first argument is the schema, and the second argument is the action itself.
 
 ```ts
 import { joi } from "sveltekit-superactions";
