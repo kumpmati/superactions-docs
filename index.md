@@ -8,17 +8,26 @@ hero:
   tagline: Call your server code like normal functions
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: What is Superactions?
+      link: /guide/what-is-superactions
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Quickstart
+      link: /guide/getting-started
+    - theme: alt
+      text: GitHub
+      link: https://github.com/kumpmati/sveltekit-superactions
 
 features:
-  - title: Fully type-safe
-    details: Same types on the client and server, and 'Go to definition' support.
+  - title: Full type safety
+    icon: TS
+    details: Types are shared between the client and the server, with 'Go to definition' support.
   - title: Easy to use
+    icon: 👶
     details: Calls to the server feel like calling a normal async function.
-  - title: Just the 'right' amount of magic 🪄
-    details: Superactions is a small wrapper around existing SvelteKit functionality.
+  - title: The 'right' amount of magic
+    icon: 🪄
+    details: The library is a small wrapper around existing SvelteKit functionality.
+  - title: Built-in validation
+    icon: 🔒
+    details: Stay safe! Body schema validation using Zod or Joi (more coming!)
 ---

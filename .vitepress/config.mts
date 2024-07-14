@@ -7,22 +7,27 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      { text: "Home", link: "/" },
-      { text: "Examples", link: "/markdown-examples" },
+      { text: "Guide", link: "/guide/getting-started", activeMatch: "/guide" },
     ],
 
     sidebar: [
       {
-        text: "Examples",
+        text: "Introduction",
         items: [
-          { text: "Markdown Examples", link: "/markdown-examples" },
-          { text: "Runtime API Examples", link: "/api-examples" },
+          {
+            text: "What is Superactions?",
+            link: "/guide/what-is-superactions",
+          },
+          { text: "Getting Started", link: "/guide/getting-started" },
         ],
       },
     ],
 
     socialLinks: [
-      { icon: "github", link: "https://github.com/vuejs/vitepress" },
+      {
+        icon: "github",
+        link: "https://github.com/kumpmati/sveltekit-superactions",
+      },
     ],
   },
 });
