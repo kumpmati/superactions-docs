@@ -44,7 +44,7 @@ This is the relative path where your API route is mounted. Since we chose to exp
 
 ### `actions`
 
-This is the object where you define all the functions that the client can call in this API. Each action becomes a function to call when using the API in the client.
+This is the object where you define all the actions that the client can call in this API. Each action becomes a function to call when using the API in the client.
 
 ## Load function
 
