@@ -12,7 +12,6 @@ Here are some concrete examples:
 
 1. Games\* or other interactive apps that don't use forms for interaction
 2. Stores or reactive classes that call the server from outside the component tree
-3.
 
 <small>\*Fast-paced games probably shouldn't use HTTP for communication</small>
 
