@@ -39,7 +39,7 @@ import { endpoint } from "sveltekit-superactions";
 export const POST = endpoint({
   path: "/api",
   actions: {
-    // The first argument is the RequestEvent provided by SvelteKit.
+    // e is the RequestEvent provided by SvelteKit.
     // The second argument is what the client passed as arguments.
     greet: async (e, name: string) => {
       return { greeting: `Hello, ${name}!` };
@@ -91,14 +91,14 @@ export const load = async () => {
 In order to setup the client, simply pass the loaded actions to the `superActions` function:
 
 ```svelte
+<!-- +page.svelte or +layout.svelte -->
 <script lang="ts">
-  import { superActions } from 'sveltekit-superactions';
+  import { superActions } from 'sveltekit-superactions'; // [!code highlight]
   import { setContext } from 'svelte';
 
-  // Access the data provided by the load function
   export let data; // [!code highlight]
 
-  // Initialize the client using the API schema
+  // Initialize the client using the loaded schema
   const api = superActions(data.greetingAPI); // [!code highlight]
 
   const handleClick = async () => {
@@ -108,7 +108,7 @@ In order to setup the client, simply pass the loaded actions to the `superAction
     console.log(result); // { greeting: "Hello, World!" }
   }
 
-  // (Optional) We could also make the API accessible
+  // (Optional) We could also make our API accessible
   // from anywhere in the app using svelte's contexts.
   setContext('api', api);
 </script>
@@ -139,10 +139,11 @@ const greetSchema = z.string() // [!code ++]
 export const POST = endpoint({
   path: "/api",
   actions: {
-    // The first argument is the RequestEvent provided by SvelteKit.
+    // e is the RequestEvent provided by SvelteKit.
     // The second argument is what the client passed as arguments.
     greet: async (e, name: string) => { // [!code --]
-    greet: zod(greetBody, async (e, name: string) => { // [!code ++]
+    greet: zod(greetSchema, async (e, name) => {  // [!code ++]
+      // name is now automatically inferred as string
       return { greeting: `Hello, ${name}!` };
     }, // [!code --]
     }), // [!code ++]
