@@ -1,0 +1,4 @@
+.VPHero .VPImage {
+  transform: scale(1.75);
+  transform-origin: bottom right;
+}
