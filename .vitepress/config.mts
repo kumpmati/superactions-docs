@@ -4,7 +4,14 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "SvelteKit Superactions",
   description: "Call your server code like normal functions",
+
+  head: [["link", { rel: "icon", href: "/logo.webp" }]],
+
   themeConfig: {
+    logo: {
+      src: "/logo.webp",
+    },
+
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Guide", link: "/guide/getting-started", activeMatch: "/guide" },
