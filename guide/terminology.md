@@ -6,7 +6,9 @@ Some terminology in the documentation is Svelte or SvelteKit-specific, but here 
 
 An endpoint under the hood is a simple request handler that matches incoming requests to one of the actions you've defined inside it.
 
-An endpoint is created using the [`endpoint`](/reference/endpoint.md) function. You can create as many endpoints as you like. You just have to export the return value of the function as a POST request handler inside a `+server.ts` file, and make sure the endpoint's [`path`](/reference/endpoint.md#path) matches the route where it's exported.
+An endpoint is created using the [`endpoint`](/reference/endpoint.md) function. You can create as many endpoints as you like, but each endpoint must be exported as a POST request handler inside its own `+server.ts` file. Make also sure that each endpoint's [`path`](/reference/endpoint.md#path) matches the route where it's exported.
+
+The routes of two endpoints cannot be the same.
 
 ## Action
 
