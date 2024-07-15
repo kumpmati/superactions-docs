@@ -17,9 +17,9 @@ npm install -D sveltekit-superactions
 
 There are three necessary parts to using Superactions:
 
-1. Server - Defines the API
-2. Load function(s) - Provide the API schema to the client
-3. Client - Uses the API
+1. Server - Defines the endpoint(s)
+2. Load function(s) - Provides the endpoint schemas to the client
+3. Client - Uses the endpoint(s)
 
 ## Server setup
 
