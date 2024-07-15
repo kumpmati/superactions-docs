@@ -24,7 +24,7 @@ This path must be correct, otherwise all calls to this endpoint fail.
 
 An object containing all the actions for the endpoint. Each key is an action name, and the value is the handler function for that action.
 
-Each key in this object is available on the client as an async function of the same name.
+When properly initialised, each key in this object is available on the client as an async function of the same name.
 
 Example:
 
