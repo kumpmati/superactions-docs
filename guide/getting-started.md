@@ -23,7 +23,7 @@ There are three necessary parts to using Superactions:
 
 ## Server setup
 
-First, we have to define an API on the server. An API is just a group of actions (fancy name for function) that we want to be able to call from client-side code as normal functions.
+First, we have to define an API on the server. An API is just a group of actions (fancy name for functions) that we want to be able to call from client-side code as normal functions.
 
 To define an API, use the `superAPI` function. It takes in a path and some actions, and returns a normal SvelteKit request handler that can be exportes inside a `+server.ts` file.
 
