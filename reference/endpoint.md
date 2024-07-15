@@ -24,7 +24,7 @@ This path must be correct, otherwise all calls to this endpoint fail.
 
 A user-defined object containing all the actions for the endpoint. Each key is an action name, and the value is the handler function for that action.
 
-When the endpoint is loaded on the client, it contains an async function to call each action defined in this object.
+When the endpoint is loaded on the client, each action defined here gets its own async function inside the endpoint object that can be called by the client to execute that action on the server.
 
 Example:
 
