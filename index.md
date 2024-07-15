@@ -6,7 +6,7 @@ hero:
   name: "SvelteKit Superactions"
   tagline: Call your server code from the client like normal functions.
   image:
-    src: /hero.png
+    src: /hero.webp
     alt: SvelteKit Superactions
   actions:
     - theme: brand
