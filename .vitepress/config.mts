@@ -8,6 +8,11 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Guide", link: "/guide/getting-started", activeMatch: "/guide" },
+      {
+        text: "API Reference",
+        link: "/reference/superAPI",
+        activeMatch: "/reference",
+      },
     ],
 
     sidebar: [
@@ -19,6 +24,7 @@ export default defineConfig({
             link: "/guide/what-is-superactions",
           },
           { text: "Getting Started", link: "/guide/getting-started" },
+          { text: "Terminology", link: "/guide/terminology" },
           { text: "Restrictions", link: "/guide/restrictions" },
         ],
       },
@@ -27,6 +33,13 @@ export default defineConfig({
         items: [
           { text: "With Zod", link: "/validation/zod" },
           { text: "With Joi", link: "/validation/joi" },
+        ],
+      },
+      {
+        text: "Reference",
+        items: [
+          { text: "superAPI", link: "/reference/superAPI" },
+          { text: "superActions", link: "/reference/superActions" },
         ],
       },
     ],
