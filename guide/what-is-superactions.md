@@ -11,7 +11,7 @@ SvelteKit's [load functions](https://kit.svelte.dev/docs/load) and [forms action
 Here are some concrete examples:
 
 1. Games\* or other interactive apps that don't use forms for interaction
-2. Stores or reactive classes that call the backend outside the component tree
+2. Stores or reactive classes that call the server from outside the component tree
 
 <small>\*Fast-paced games probably shouldn't use HTTP for communication</small>
 
@@ -24,8 +24,8 @@ Here's a general, non-exhaustive checklist of cases and criteria for using Super
 - The app doesn't have to work without JavaScript
 - The data you're sending is too complex for FormData (and you're tired of embedding JSON inside FormData)
 - Using form elements or URL parameters to submit the data isn't easy or practical
-- You don't care if the backend is RESTful or not
-- You want the convenience of automatic type safety for your backend calls
+- You don't care if the server is RESTful or not
+- You want the convenience of automatic type safety for your server calls
 - Your data is only JSON (with [some additions](/guide/restrictions.md#restrictions))
 
 ## Shout-outs
