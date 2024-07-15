@@ -22,7 +22,7 @@ This path must be correct, otherwise all calls to this endpoint fail.
 
 ### `actions`
 
-An object containing all the actions for the endpoint. Each key is an action name, and the value is the handler function for that action.
+A user-defined object containing all the actions for the endpoint. Each key is an action name, and the value is the handler function for that action.
 
 When the endpoint is loaded on the client, it contains an async function to call each action defined in this object.
 
