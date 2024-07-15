@@ -12,4 +12,4 @@ Actions cannot have more than 1 argument passed into them. This is mostly becaus
 
 SvelteKit automatically generates a `RequestHandler` for each route, containing type information about the available parameters and the current path.
 
-Superactions is still in an early state, and doesn't yet have support for using this type with the `superAPI` function. This means that actions don't have full type information about the available parameters.
+Superactions is still in an early state, and doesn't yet have support for using this type with the `endpoint` function. This means that actions don't have full type information about the available parameters.

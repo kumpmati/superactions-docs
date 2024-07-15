@@ -12,7 +12,7 @@ Import the `zod` helper function and wrap the action you want to validate with i
 import { zod } from "sveltekit-superactions";
 import { z } from "zod";
 
-export const POST = superAPI({
+export const POST = endpoint({
   // ... other config
   actions: {
     // body must be a non-empty string, otherwise the request fails
