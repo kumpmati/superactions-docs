@@ -2,7 +2,7 @@
 
 ## Serializable values
 
-Both the return value of an action and the parameters that you pass to that action from the client must be serializable using [devalue](https://github.com/rich-harris/devalue). This means that you can pass in and return normal JSON plus things like BigInt, Date, Map, Set and RegExp, but NOT functions or Promises.
+Both the return value of an action and the parameters that you pass to that action from the client must be serializable using [devalue](https://github.com/rich-harris/devalue). This means that you can pass in and return normal JSON plus things like `BigInt`, `Date`, `Map`, `Set` and `RegExp`, but NOT functions or Promises.
 
 ## Single-argument only
 
