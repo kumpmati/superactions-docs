@@ -2,7 +2,7 @@
 
 Superactions is a small library built around the [API routes](https://kit.svelte.dev/docs/routing#server) functionality in [SvelteKit.](https://kit.svelte.dev)
 
-It allows you to easily and type safely call your server-side code from the client, while utilising the existing functionality of SvelteKit.
+It allows you to easily and type safely call your server-side code from the client, while mostly utilising the existing functionality of SvelteKit.
 
 ## Why?
 
@@ -13,7 +13,7 @@ Here are some concrete examples:
 1. Games\* or other interactive apps that don't use forms for interaction
 2. Stores or reactive classes that call the backend outside the component tree
 
-<small>\*Fast-paced games probably shouldn't use HTTP calls for interactivity</small>
+<small>\*Fast-paced games probably shouldn't use HTTP for communication</small>
 
 ## Should I use this library?
 
