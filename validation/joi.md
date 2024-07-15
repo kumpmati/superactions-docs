@@ -12,7 +12,7 @@ Import the `joi` helper function and wrap the action you want to validate with i
 import { joi } from "sveltekit-superactions";
 import Joi from "joi";
 
-export const POST = superAPI({
+export const POST = endpoint({
   // ... other config
   actions: {
     // body must be a non-empty string, otherwise the request fails

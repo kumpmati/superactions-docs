@@ -27,16 +27,16 @@ We'll begin by making an [endpoint](/guide/terminology.md#api--endpoint) on the 
 
 First, create a `+server.ts` file somewhere inside your routes folder. We'll choose `src/routes/api` this time.
 
-To define an endpoint, use the `superAPI` function. It takes in a path and some actions, and returns a normal SvelteKit request handler that we'll then mount inside a `+server.ts` file.
+To define an endpoint, use the `endpoint` function. It takes in a path and some actions, and returns a normal SvelteKit request handler that we'll then mount inside a `+server.ts` file.
 
-In the `+server.ts` file, give the `superAPI` a path and some action(s), and export its return value as a POST handler like so:
+In the `+server.ts` file, give the `endpoint` a path and some action(s), and export its return value as a POST handler like so:
 
 ```ts
 // src/routes/api/+server.ts
-import { superAPI } from "sveltekit-superactions";
+import { endpoint } from "sveltekit-superactions";
 
-// superAPI returns a sveltekit request handler function.
-export const POST = superAPI({
+// endpoint returns a sveltekit request handler function.
+export const POST = endpoint({
   path: "/api",
   actions: {
     // The first argument is the RequestEvent provided by SvelteKit.
@@ -48,7 +48,7 @@ export const POST = superAPI({
 });
 ```
 
-The `superAPI` function takes in a config object with the following fields:
+The `endpoint` function takes in a config object with the following fields:
 
 ### `path`
 
@@ -62,7 +62,7 @@ This is where you define the functions that the client can call using this endpo
 
 The load function is what tells the client what endpoints and actions are available.
 
-In order to access the endpoint on the client, we need to load the endpoint using `+page.server.ts` or `+layout.server.ts`. Simply import the handler that you created previously using the `superAPI` function, and return its actions like so:
+In order to access the endpoint on the client, we need to load the endpoint using `+page.server.ts` or `+layout.server.ts`. Simply import the handler that you created previously using the `endpoint` function, and return its actions like so:
 
 ```ts
 // src/routes/+page.layout.ts
@@ -125,14 +125,14 @@ In this case the input is a string, to we'll
 
 ```ts
 // src/routes/api/+server.ts
-import { superAPI } from "sveltekit-superactions"; // [!code --]
-import { superAPI, zod } from "sveltekit-superactions"; // [!code ++]
+import { endpoint } from "sveltekit-superactions"; // [!code --]
+import { endpoint, zod } from "sveltekit-superactions"; // [!code ++]
 import { z } from "zod"; // [!code ++]
 
 const greetSchema = z.string() // [!code ++]
 
-// superAPI returns a sveltekit request handler function.
-export const POST = superAPI({
+// endpoint returns a sveltekit request handler function.
+export const POST = endpoint({
   path: "/api",
   actions: {
     // The first argument is the RequestEvent provided by SvelteKit.

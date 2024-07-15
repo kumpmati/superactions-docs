@@ -17,7 +17,7 @@ export default defineConfig({
       { text: "Guide", link: "/guide/getting-started", activeMatch: "/guide" },
       {
         text: "API Reference",
-        link: "/reference/superAPI",
+        link: "/reference/endpoint",
         activeMatch: "/reference",
       },
     ],
@@ -45,7 +45,7 @@ export default defineConfig({
       {
         text: "Reference",
         items: [
-          { text: "superAPI", link: "/reference/superAPI" },
+          { text: "endpoint", link: "/reference/endpoint" },
           { text: "superActions", link: "/reference/superActions" },
         ],
       },

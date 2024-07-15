@@ -1,13 +1,13 @@
-# `superAPI`
+# `endpoint`
 
 Used to build an endpoint that holds one or more action(s), where an action is a function that the client can call like a normal `async` function. It returns a request handler function that can be mounted as a POST handler in a [+server.ts](https://kit.svelte.dev/docs/routing#server) file like so:
 
 ```ts
 // src/routes/.../+server.ts
 
-import { superAPI } from "sveltekit-superactions";
+import { endpoint } from "sveltekit-superactions";
 
-export const POST = superAPI({
+export const POST = endpoint({
   // ...
 });
 ```
@@ -31,7 +31,7 @@ Example:
 ```ts
 // On the server
 
-export const POST = superAPI({
+export const POST = endpoint({
   // ...
   actions: {
     myFunction: async () => {}, // [!code highlight]
