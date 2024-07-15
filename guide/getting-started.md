@@ -41,9 +41,13 @@ export const POST = endpoint({
   actions: {
     // The first argument is the RequestEvent provided by SvelteKit.
     // The second argument is what the client passed as arguments.
-    greet: async (event: RequestEvent, name: string) => {
+    greet: async (e, name: string) => {
       return { greeting: `Hello, ${name}!` };
     },
+
+    // If you want to add more actions, simply define them each one here as an async function:
+    // secondAction: async (e, body) => { ... }
+    // someThirdAction: async (e, body) => { ... }
   },
 });
 ```
@@ -52,7 +56,7 @@ The `endpoint` function takes in a config object with the following fields:
 
 ### `path`
 
-This is the relative path where your API route is mounted. Since we chose to export it at `src/routes/api/+server.ts`, the path should be set as `/api`.
+This is the relative path where your endpoint is mounted. Since we chose to export it at `src/routes/api/+server.ts`, the path should be set as `/api`.
 
 ### `actions`
 
@@ -137,8 +141,8 @@ export const POST = endpoint({
   actions: {
     // The first argument is the RequestEvent provided by SvelteKit.
     // The second argument is what the client passed as arguments.
-    greet: async (event: RequestEvent, name: string) => { // [!code --]
-    greet: zod(greetBody, async (event: RequestEvent, name: string) => { // [!code ++]
+    greet: async (e, name: string) => { // [!code --]
+    greet: zod(greetBody, async (e, name: string) => { // [!code ++]
       return { greeting: `Hello, ${name}!` };
     }, // [!code --]
     }), // [!code ++]

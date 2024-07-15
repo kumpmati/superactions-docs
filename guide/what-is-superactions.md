@@ -12,21 +12,29 @@ Here are some concrete examples:
 
 1. Games\* or other interactive apps that don't use forms for interaction
 2. Stores or reactive classes that call the server from outside the component tree
+3.
 
 <small>\*Fast-paced games probably shouldn't use HTTP for communication</small>
 
 ## Should I use this library?
 
-While I do think you should try Superactions out (_totally unbiased opinion_ 😉), it's best if you're also aware of the nice built-in tooling in SvelteKit [\[1\]](https://kit.svelte.dev/docs/load) [\[2\]](https://kit.svelte.dev/docs/form-actions) and community tools like [Superforms](https://superforms.rocks).
+While I do think you should try Superactions out (_totally unbiased opinion_ 😉), it's best if you're also aware of the nice built-in tooling in SvelteKit and other community tools.
 
-Here's a general, non-exhaustive checklist of cases and criteria for using Superactions:
+### 🚫 When you cannot use Superactions:
 
-- The app doesn't have to work without JavaScript
-- The data you're sending is too complex for FormData (and you're tired of embedding JSON inside FormData)
-- Using form elements or URL parameters to submit the data isn't easy or practical
-- You don't care if the server is RESTful or not
-- You want the convenience of automatic type safety for your server calls
-- Your data is only JSON (with [some additions](/guide/restrictions.md#restrictions))
+1. The app has to work without JavaScript (try [form actions](https://kit.svelte.dev/docs/form-actions))
+
+### 🤷 When you might not need Superactions:
+
+1. You're only passing data from the server to the client (try [load functions](https://kit.svelte.dev/docs/load))
+2. Most of the data submission can be done using form elements (try [Superforms](https://superforms.rocks)!) or URL parameters
+
+### 🪄 When using Superactions can benefit you:
+
+1. The data you're sending is too complex to be represented as FormData (and maybe you don't like embedding JSON inside FormData)
+2. Using form elements or URL parameters to submit the data isn't easy or practical
+3. You want automatic type safety for your server calls
+4. Your data is JSON only (with [some additions](/guide/restrictions.md#restrictions))
 
 ## Shout-outs
 
