@@ -28,7 +28,7 @@ While I do think you should try Superactions out (_totally unbiased opinion_ �
 1. You're only passing data from the server to the client (try [load functions](https://kit.svelte.dev/docs/load))
 2. Most of the data submission can be done using form elements (try [Superforms](https://superforms.rocks)!) or URL parameters
 
-### 🪄 When using Superactions can benefit you:
+### 👍 When using Superactions can benefit you:
 
 1. The data you're sending is too complex to be represented as FormData (and maybe you don't like embedding JSON inside FormData)
 2. Using form elements or URL parameters to submit the data isn't easy or practical
