@@ -1,7 +1,7 @@
 # Getting Started
 
 ::: warning
-🚧 This library is still in an early state. There will be bugs, and breaking changes will likely happen before a v1.0 release, so be careful!
+🚧 This library is still in an early state. There will be bugs and breaking changes before a v1.0 release, so be careful!
 :::
 
 To use Superactions, you need a SvelteKit project. You can either set up one from scratch, or use an existing one.
@@ -15,11 +15,10 @@ npm install -D sveltekit-superactions
 
 ## Anatomy
 
-There are three necessary parts to using Superactions:
+There are only two necessary parts to using Superactions:
 
 1. Server - Defines the endpoint(s)
-2. Load function(s) - Provides the endpoint schemas to the client
-3. Client - Uses the endpoint(s)
+2. Client - Uses the endpoint(s)
 
 ## Server setup
 
@@ -28,8 +27,6 @@ We'll begin by making an [endpoint](/guide/terminology.md#api--endpoint) on the 
 First, create a `+server.ts` file somewhere inside your routes folder. We'll choose `src/routes/api` this time.
 
 To define an endpoint, use the `endpoint` function. It takes in a path and some actions, and returns a normal SvelteKit request handler that we'll then mount inside a `+server.ts` file.
-
-In the `+server.ts` file, give the `endpoint` a path and some action(s), and export its return value as a POST handler like so:
 
 ```ts
 // src/routes/api/+server.ts
@@ -62,44 +59,19 @@ This is the relative path where your endpoint is mounted. Since we chose to expo
 
 This is where you define the functions that the client can call using this endpoint. In the example above, we define one action called `greet`, that takes a `name` as input and returns an object containing the greeting message.
 
-## Load function
-
-The load function is what tells the client what endpoints and actions are available.
-
-In order to access the endpoint on the client, we need to load the endpoint using `+page.server.ts` or `+layout.server.ts`. Simply import the handler that you created previously using the `endpoint` function, and return its actions like so:
-
-```ts
-// src/routes/+page.layout.ts
-
-// Since we exported the endpoint as a POST handler,
-// we'll import it here and rename it for readability.
-import { POST as greetingAPI } from "./api/+server.js"; // [!code highlight]
-
-export const load = async () => {
-  return {
-    // ...other props
-
-    // The imported endpoint has a property called 'actions',
-    // which we need to return in the load function.
-    greetingAPI: greetingAPI.actions, // [!code highlight]
-  };
-};
-```
-
 ## Client setup
 
-In order to setup the client, simply pass the loaded actions to the `superActions` function:
+In order to setup the client, simply call the `superActions` function and give it the exported API type and path:
 
 ```svelte
 <!-- +page.svelte or +layout.svelte -->
 <script lang="ts">
   import { superActions } from 'sveltekit-superactions'; // [!code highlight]
   import { setContext } from 'svelte';
+  import type { API } from './api/+server.ts';
 
-  export let data; // [!code highlight]
-
-  // Initialize the client using the loaded schema
-  const api = superActions(data.greetingAPI); // [!code highlight]
+  // Initialize the client
+  const api = superActions<API>('/api'); // [!code highlight]
 
   const handleClick = async () => {
     // You can now call api.greet like a normal async function.
