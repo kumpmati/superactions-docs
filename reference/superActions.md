@@ -4,18 +4,17 @@ Used to instantiate a single endpoint on the client side. The return value of th
 
 ## Arguments
 
-### `actions`
+### `path`
 
-The actions property of the endpoint you want to instantiate. Usually you would load the endpoint's actions in a load function, and pass them in like so:
+The URL path where the endpoint is mounted. Usually you'd use a relative path here, but it can also be an absolute URL if you're calling an endpoint hosted in a different domain.
 
 ```svelte
 <!-- +page.svelte or some other .svelte file -->
 <script lang="ts">
-  // someEndpoint is loaded from the server
-  export let data;
+  import type { API } from './path/to/api.js';
 
   // api now contains all the actions of someEndpoint
-  const api = superActions(data.someEndpoint); // [!code highlight]
+  const api = superActions<API>('/my-api-path'); // [!code highlight]
   </script>
 ```
 

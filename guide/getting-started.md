@@ -1,7 +1,7 @@
 # Getting Started
 
 ::: warning
-🚧 This library is still in an early state. There will be bugs, and breaking changes will likely happen before a v1.0 release, so be careful!
+🚧 This library is still in an early state. There will be bugs and breaking changes before a v1.0 release, so be careful!
 :::
 
 To use Superactions, you need a SvelteKit project. You can either set up one from scratch, or use an existing one.
@@ -15,11 +15,10 @@ npm install -D sveltekit-superactions
 
 ## Anatomy
 
-There are three necessary parts to using Superactions:
+There are only two necessary parts to using Superactions:
 
 1. Server - Defines the endpoint(s)
-2. Load function(s) - Provides the endpoint schemas to the client
-3. Client - Uses the endpoint(s)
+2. Client - Uses the endpoint(s)
 
 ## Server setup
 
@@ -27,9 +26,7 @@ We'll begin by making an [endpoint](/guide/terminology.md#api--endpoint) on the 
 
 First, create a `+server.ts` file somewhere inside your routes folder. We'll choose `src/routes/api` this time.
 
-To define an endpoint, use the `endpoint` function. It takes in a path and some actions, and returns a normal SvelteKit request handler that we'll then mount inside a `+server.ts` file.
-
-In the `+server.ts` file, give the `endpoint` a path and some action(s), and export its return value as a POST handler like so:
+To define an endpoint, use the `endpoint` function. It takes in an object containing all the actions you want to expose, and returns a normal SvelteKit request handler that we'll then mount inside a `+server.ts` file.
 
 ```ts
 // src/routes/api/+server.ts
@@ -37,69 +34,34 @@ import { endpoint } from "sveltekit-superactions";
 
 // endpoint returns a sveltekit request handler function.
 export const POST = endpoint({
-  path: "/api",
-  actions: {
-    // e is the RequestEvent provided by SvelteKit.
-    // The second argument is what the client passed as arguments.
-    greet: async (e, name: string) => {
-      return { greeting: `Hello, ${name}!` };
-    },
-
-    // If you want to add more actions, simply define them each one here as an async function:
-    // secondAction: async (e, body) => { ... }
-    // someThirdAction: async (e, body) => { ... }
+  // e is the RequestEvent provided by SvelteKit.
+  // The second argument is what the client passed as arguments.
+  greet: async (e, name: string) => {
+    // whatever we return gets returned to the client
+    return { greeting: `Hello, ${name}!` };
   },
+
+  // If you want to add more actions, simply define them each one here as an async function:
+  // secondAction: async (e, body) => { ... }
+  // someThirdAction: async (e, body) => { ... }
 });
 ```
 
-The `endpoint` function takes in a config object with the following fields:
-
-### `path`
-
-This is the relative path where your endpoint is mounted. Since we chose to export it at `src/routes/api/+server.ts`, the path should be set as `/api`.
-
-### `actions`
-
-This is where you define the functions that the client can call using this endpoint. In the example above, we define one action called `greet`, that takes a `name` as input and returns an object containing the greeting message.
-
-## Load function
-
-The load function is what tells the client what endpoints and actions are available.
-
-In order to access the endpoint on the client, we need to load the endpoint using `+page.server.ts` or `+layout.server.ts`. Simply import the handler that you created previously using the `endpoint` function, and return its actions like so:
-
-```ts
-// src/routes/+page.layout.ts
-
-// Since we exported the endpoint as a POST handler,
-// we'll import it here and rename it for readability.
-import { POST as greetingAPI } from "./api/+server.js"; // [!code highlight]
-
-export const load = async () => {
-  return {
-    // ...other props
-
-    // The imported endpoint has a property called 'actions',
-    // which we need to return in the load function.
-    greetingAPI: greetingAPI.actions, // [!code highlight]
-  };
-};
-```
+In the example above, we define one action called `greet`, that takes a `name` as input and returns an object containing a greeting message.
 
 ## Client setup
 
-In order to setup the client, simply pass the loaded actions to the `superActions` function:
+In order to setup the client, simply call the `superActions` function and give it the exported API type and path:
 
 ```svelte
 <!-- +page.svelte or +layout.svelte -->
 <script lang="ts">
   import { superActions } from 'sveltekit-superactions'; // [!code highlight]
   import { setContext } from 'svelte';
+  import type { API } from './api/+server.ts';
 
-  export let data; // [!code highlight]
-
-  // Initialize the client using the loaded schema
-  const api = superActions(data.greetingAPI); // [!code highlight]
+  // Initialize the client
+  const api = superActions<API>('/api'); // [!code highlight]
 
   const handleClick = async () => {
     // You can now call api.greet like a normal async function.
@@ -123,9 +85,7 @@ Since the client can pass in arbitrary values to the backend, we should probably
 
 Let's use the Zod validator. Make sure to install Zod as a dependency if you haven't already!
 
-Go back to the `+server.ts` file, and import the zod helper from `sveltekit-superactions`. The helper takes in two parameters: (1) the schema, and (2) the handler to call with the validated arguments.
-
-In this case the input is a string, to we'll
+Go back to the `+server.ts` file, and import the zod helper from `sveltekit-superactions`. The helper takes in two parameters: (1) the validation schema, and (2) the action to call with the validated arguments.
 
 ```ts
 // src/routes/api/+server.ts
@@ -133,21 +93,16 @@ import { endpoint } from "sveltekit-superactions"; // [!code --]
 import { endpoint, zod } from "sveltekit-superactions"; // [!code ++]
 import { z } from "zod"; // [!code ++]
 
-const greetSchema = z.string() // [!code ++]
+const greetSchema = z.string(); // [!code ++]
 
-// endpoint returns a sveltekit request handler function.
 export const POST = endpoint({
-  path: "/api",
-  actions: {
-    // e is the RequestEvent provided by SvelteKit.
-    // The second argument is what the client passed as arguments.
-    greet: async (e, name: string) => { // [!code --]
-    greet: zod(greetSchema, async (e, name) => {  // [!code ++]
-      // name is now automatically inferred as string
-      return { greeting: `Hello, ${name}!` };
-    }, // [!code --]
-    }), // [!code ++]
-  },
+  greet: async (e, name: string) => { // [!code --]
+  greet: zod(greetSchema, async (e, name) => { // [!code ++]
+    // [!code ++]
+    // name is now automatically inferred as string
+    return { greeting: `Hello, ${name}!` };
+  }, // [!code --]
+  }), // [!code ++]
 });
 ```
 

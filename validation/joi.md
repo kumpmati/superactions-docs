@@ -13,13 +13,10 @@ import { joi } from "sveltekit-superactions";
 import Joi from "joi";
 
 export const POST = endpoint({
-  // ... other config
-  actions: {
-    // body must be a non-empty string, otherwise the request fails
-    greet: joi(Joi.string().min(1), async (e, body) => {
-      // the type of body is inferred as string
-      return { greeting: `Hello, ${body}` };
-    }),
-  },
+  // body must be a non-empty string, otherwise the request fails
+  greet: joi(Joi.string().min(1), async (e, body) => {
+    // the type of body is inferred as string
+    return { greeting: `Hello, ${body}` };
+  }),
 });
 ```

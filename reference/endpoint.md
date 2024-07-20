@@ -18,13 +18,11 @@ export const POST = endpoint({
 
 A string referencing the relative path where the endpoint is mounted. If you mount the endpoint at `src/routes/api/+server.ts`, the `path` should be `/api`.
 
-This path must be correct, otherwise all calls to this endpoint fail.
-
 ### `actions`
 
 A user-defined object containing all the actions for the endpoint. Each key is an action name, and the value is the handler function for that action.
 
-When the endpoint is loaded on the client, each action defined here gets its own async function inside the endpoint object that can be called by the client to execute that action on the server.
+When the endpoint is used on the client, each action defined here gets its own async function inside the endpoint object that can be called by the client to execute that action on the server.
 
 Example:
 
@@ -43,11 +41,9 @@ export const POST = endpoint({
 <!-- On the client -->
 
  <script lang="ts">
-
   // ...
-  export let data;
 
-  const api = superActions(data.myAPI);
+  const api = superActions('/path-to-api');
 
   const handle = async () => {
     await api.myFunction(); // [!code highlight]
