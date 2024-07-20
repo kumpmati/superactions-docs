@@ -26,7 +26,7 @@ We'll begin by making an [endpoint](/guide/terminology.md#api--endpoint) on the 
 
 First, create a `+server.ts` file somewhere inside your routes folder. We'll choose `src/routes/api` this time.
 
-To define an endpoint, use the `endpoint` function. It takes in a path and some actions, and returns a normal SvelteKit request handler that we'll then mount inside a `+server.ts` file.
+To define an endpoint, use the `endpoint` function. It takes in an object containing all the actions you want to expose, and returns a normal SvelteKit request handler that we'll then mount inside a `+server.ts` file.
 
 ```ts
 // src/routes/api/+server.ts
@@ -34,30 +34,20 @@ import { endpoint } from "sveltekit-superactions";
 
 // endpoint returns a sveltekit request handler function.
 export const POST = endpoint({
-  path: "/api",
-  actions: {
-    // e is the RequestEvent provided by SvelteKit.
-    // The second argument is what the client passed as arguments.
-    greet: async (e, name: string) => {
-      return { greeting: `Hello, ${name}!` };
-    },
-
-    // If you want to add more actions, simply define them each one here as an async function:
-    // secondAction: async (e, body) => { ... }
-    // someThirdAction: async (e, body) => { ... }
+  // e is the RequestEvent provided by SvelteKit.
+  // The second argument is what the client passed as arguments.
+  greet: async (e, name: string) => {
+    // whatever we return gets returned to the client
+    return { greeting: `Hello, ${name}!` };
   },
+
+  // If you want to add more actions, simply define them each one here as an async function:
+  // secondAction: async (e, body) => { ... }
+  // someThirdAction: async (e, body) => { ... }
 });
 ```
 
-The `endpoint` function takes in a config object with the following fields:
-
-### `path`
-
-This is the relative path where your endpoint is mounted. Since we chose to export it at `src/routes/api/+server.ts`, the path should be set as `/api`.
-
-### `actions`
-
-This is where you define the functions that the client can call using this endpoint. In the example above, we define one action called `greet`, that takes a `name` as input and returns an object containing the greeting message.
+In the example above, we define one action called `greet`, that takes a `name` as input and returns an object containing a greeting message.
 
 ## Client setup
 
@@ -95,9 +85,7 @@ Since the client can pass in arbitrary values to the backend, we should probably
 
 Let's use the Zod validator. Make sure to install Zod as a dependency if you haven't already!
 
-Go back to the `+server.ts` file, and import the zod helper from `sveltekit-superactions`. The helper takes in two parameters: (1) the schema, and (2) the handler to call with the validated arguments.
-
-In this case the input is a string, to we'll
+Go back to the `+server.ts` file, and import the zod helper from `sveltekit-superactions`. The helper takes in two parameters: (1) the validation schema, and (2) the action to call with the validated arguments.
 
 ```ts
 // src/routes/api/+server.ts
@@ -105,21 +93,16 @@ import { endpoint } from "sveltekit-superactions"; // [!code --]
 import { endpoint, zod } from "sveltekit-superactions"; // [!code ++]
 import { z } from "zod"; // [!code ++]
 
-const greetSchema = z.string() // [!code ++]
+const greetSchema = z.string(); // [!code ++]
 
-// endpoint returns a sveltekit request handler function.
 export const POST = endpoint({
-  path: "/api",
-  actions: {
-    // e is the RequestEvent provided by SvelteKit.
-    // The second argument is what the client passed as arguments.
-    greet: async (e, name: string) => { // [!code --]
-    greet: zod(greetSchema, async (e, name) => {  // [!code ++]
-      // name is now automatically inferred as string
-      return { greeting: `Hello, ${name}!` };
-    }, // [!code --]
-    }), // [!code ++]
-  },
+  greet: async (e, name: string) => { // [!code --]
+  greet: zod(greetSchema, async (e, name) => { // [!code ++]
+    // [!code ++]
+    // name is now automatically inferred as string
+    return { greeting: `Hello, ${name}!` };
+  }, // [!code --]
+  }), // [!code ++]
 });
 ```
 

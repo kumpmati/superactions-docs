@@ -13,13 +13,10 @@ import { zod } from "sveltekit-superactions";
 import { z } from "zod";
 
 export const POST = endpoint({
-  // ... other config
-  actions: {
-    // body must be a non-empty string, otherwise the request fails
-    greet: zod(z.string().min(1), async (e, body) => {
-      // the type of body is inferred as string
-      return { greeting: `Hello, ${body}` };
-    }),
-  },
+  // body must be a non-empty string, otherwise the request fails
+  greet: zod(z.string().min(1), async (e, body) => {
+    // the type of body is inferred as string
+    return { greeting: `Hello, ${body}` };
+  }),
 });
 ```
