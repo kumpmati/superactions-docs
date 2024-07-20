@@ -43,6 +43,16 @@ export default defineConfig({
         ],
       },
       {
+        text: "Examples",
+        items: [
+          { text: "Auto-importing actions", link: "/examples/autoimport" },
+          { text: "Using context", link: "/examples/context" },
+          { text: "Nesting / grouping", link: "/examples/nesting" },
+          { text: "Destructuring the client", link: "/examples/destructuring" },
+          { text: "Multiple endpoints", link: "/examples/multiple-endpoints" },
+        ],
+      },
+      {
         text: "Reference",
         items: [
           { text: "endpoint", link: "/reference/endpoint" },

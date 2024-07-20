@@ -22,14 +22,14 @@ hero:
 features:
   - title: Full type safety
     icon: TS
-    details: Types are shared between the client and the server, with 'Go to definition' support.
+    details: Types are shared between the client and the server, with 'Go to definition'-level support.
   - title: Easy to use
     icon: 👶
-    details: Calls to the server feel like calling a normal async function.
-  - title: The 'right' amount of magic
+    details: Calls to the server seem like calling a normal async function.
+  - title: A magical fit
     icon: 🪄
-    details: The library is a small wrapper around existing SvelteKit functionality.
-  - title: Built-in validation
+    details: Feels like something SvelteKit would (and should) have as a built-in feature.
+  - title: Stay validated
     icon: 🔒
-    details: Stay safe! Body schema validation using Zod or Joi (more coming!)
+    details: Built-in body schema validation using Zod or Joi (with more libraries coming!)
 ---

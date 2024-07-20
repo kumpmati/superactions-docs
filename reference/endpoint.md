@@ -26,10 +26,7 @@ Example:
 // On the server
 
 export const POST = endpoint({
-  // ...
-  actions: {
-    myFunction: async () => {}, // [!code highlight]
-  },
+  myFunction: async () => {}, // [!code highlight]
 });
 ```
 

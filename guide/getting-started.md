@@ -22,11 +22,11 @@ There are only two necessary parts to using Superactions:
 
 ## Server setup
 
-We'll begin by making an [endpoint](/guide/terminology.md#api--endpoint) on the server. This endpoint will hold the [actions](/guide/terminology.md#actions) (fancy name for functions) that we want to be able to call from client-side code like normal functions.
+We'll begin by making an [endpoint](/guide/terminology.md#api--endpoint) on the server, and assigning one [action](/guide/terminology.md#actions) to it.
 
 First, create a `+server.ts` file somewhere inside your routes folder. We'll choose `src/routes/api` this time.
 
-To define an endpoint, use the `endpoint` function. It takes in an object containing all the actions you want to expose, and returns a normal SvelteKit request handler that we'll then mount inside a `+server.ts` file.
+Use the `endpoint` function to define the endpoint. It takes in an object containing all the actions you want to expose, and returns a normal SvelteKit request handler that we'll then mount inside a `+server.ts` file.
 
 ```ts
 // src/routes/api/+server.ts
@@ -41,49 +41,48 @@ export const POST = endpoint({
     return { greeting: `Hello, ${name}!` };
   },
 
-  // If you want to add more actions, simply define them each one here as an async function:
-  // secondAction: async (e, body) => { ... }
-  // someThirdAction: async (e, body) => { ... }
+  // If you want to add more actions, simply put them here inside the endpoint.
+  // Actions can be defined both inline, or imported from other files.
+
+  // foo: async (e, body) => { ... }
+  // bar: async (e, body) => { ... }
 });
+
+// export the API type, as we'll need it to provide type information to the client.
+export type API = typeof POST;
 ```
 
-In the example above, we define one action called `greet`, that takes a `name` as input and returns an object containing a greeting message.
+In the example above, we define one action called `greet` that takes a `name` as input and returns an object containing a greeting message.
 
 ## Client setup
 
-In order to setup the client, simply call the `superActions` function and give it the exported API type and path:
+In order to setup the client, simply call the `superActions` function and give it the path and exported API type.
+The endpoint's structure is now mirrored on the client, and you can call the actions like they are normal async functions.
 
 ```svelte
 <!-- +page.svelte or +layout.svelte -->
 <script lang="ts">
   import { superActions } from 'sveltekit-superactions'; // [!code highlight]
-  import { setContext } from 'svelte';
-  import type { API } from './api/+server.ts';
+  import type { API } from './api/+server.ts'; // [!code highlight]
 
   // Initialize the client
   const api = superActions<API>('/api'); // [!code highlight]
 
   const handleClick = async () => {
-    // You can now call api.greet like a normal async function.
     const result = await api.greet('World'); // [!code highlight]
 
     console.log(result); // { greeting: "Hello, World!" }
   }
-
-  // (Optional) We could also make our API accessible
-  // from anywhere in the app using svelte's contexts.
-  setContext('api', api);
 </script>
-
 
 <button on:click={handleClick}>Click me</button>
 ```
 
 ## Schema validation
 
-Since the client can pass in arbitrary values to the backend, we should probably validate the incoming values. Superactions provides small helper functions for [Zod](https://zod.dev) and [Joi](https://joi.dev/) that you can use to validate the incoming value before calling the action.
+Right now the client could pass in any values to the backend, so we should add validation to the action. Superactions provides small helper functions for [Zod](https://zod.dev) and [Joi](https://joi.dev/) that you can use to validate the incoming value before calling the action.
 
-Let's use the Zod validator. Make sure to install Zod as a dependency if you haven't already!
+Let's use the Zod validator. Make sure to install `zod` as a dependency if you haven't already!
 
 Go back to the `+server.ts` file, and import the zod helper from `sveltekit-superactions`. The helper takes in two parameters: (1) the validation schema, and (2) the action to call with the validated arguments.
 
@@ -112,4 +111,4 @@ Now, if the client tries calling `greet` with anything other than a string, the 
 
 You're now an expert at the basics of Superactions!
 
-A good next step is to familiarise yourself with [the restrictions](/guide/restrictions) that come with using Superactions.
+A good next step is to familiarise yourself with [the restrictions](/guide/restrictions) that come with using Superactions, along with some of the different ways of structuring your Superactions-related code.
