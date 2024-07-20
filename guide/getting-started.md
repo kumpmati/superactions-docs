@@ -111,4 +111,4 @@ Now, if the client tries calling `greet` with anything other than a string, the 
 
 You're now an expert at the basics of Superactions!
 
-A good next step is to familiarise yourself with [the restrictions](/guide/restrictions) that come with using Superactions, along with some of the different ways of structuring your Superactions-related code.
+A good next step is to familiarise yourself with [few the restrictions](/guide/restrictions) that come with using Superactions, along with the different ways of [structuring your code](/examples/autoimport.md) in the Examples section.
