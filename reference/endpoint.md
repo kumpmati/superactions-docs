@@ -14,10 +14,6 @@ export const POST = endpoint({
 
 ## Arguments
 
-### `path`
-
-A string referencing the relative path where the endpoint is mounted. If you mount the endpoint at `src/routes/api/+server.ts`, the `path` should be `/api`.
-
 ### `actions`
 
 A user-defined object containing all the actions for the endpoint. Each key is an action name, and the value is the handler function for that action.
